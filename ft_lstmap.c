@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spatez <spatez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 15:04:24 by spatez            #+#    #+#             */
-/*   Updated: 2021/05/27 17:19:49 by spatez           ###   ########.fr       */
+/*   Created: 2021/05/27 18:00:06 by spatez            #+#    #+#             */
+/*   Updated: 2021/06/11 00:20:59 by spatez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*s3;
-	int		i;
-	int		j;
+	t_list	*dest;
+	t_list	*ptdr;
 
-	i = -1;
-	j = 0;
-	if (!s1 || !s2)
+	if (!lst || !f)
 		return (NULL);
-	s3 = ft_calloc(1, (ft_strlen(s1) + ft_strlen(s2)) + 1);
-	if (!s3)
-		return (NULL);
-	while (s1[++i] != '\0')
+	ptdr = NULL;
+	while (lst)
 	{
-		s3[j] = s1[i];
-		j++;
+		dest = ft_lstnew(((t_list *)f(lst->content)));
+		if (!dest)
+		{
+			if (del)
+				ft_lstclear(&ptdr, del);
+			else
+				free(dest);
+			return (NULL);
+		}		
+		ft_lstadd_back(&ptdr, dest);
+		lst = lst->next;
 	}
-	i = -1;
-	while (s2[++i] != '\0')
-	{
-		s3[j] = s2[i];
-		j++;
-	}
-	return (s3);
+	return (ptdr);
 }
