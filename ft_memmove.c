@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spatez <spatez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 15:03:50 by spatez            #+#    #+#             */
-/*   Updated: 2021/06/11 00:40:45 by spatez           ###   ########.fr       */
+/*   Updated: 2021/06/17 14:20:42 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*ft_memmove(void *b, const void *a, size_t n)
 	char			*bcast;
 	int				i;
 
-	if (a == 0 && b == 0)
-		return (NULL);
+	if ((a == 0 && b == 0)
+		|| ((unsigned char *) b == (unsigned char *) a))
 	i = -1;
 	acast = (char *)a;
 	bcast = (char *)b;

@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:58:37 by spatez            #+#    #+#             */
-/*   Updated: 2021/06/07 14:35:59 by seb              ###   ########.fr       */
+/*   Updated: 2021/06/17 14:19:10 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*swap;
 
-	if (!del)
+	if (!del || !lst)
 		return ;
 	while (*lst)
 	{
